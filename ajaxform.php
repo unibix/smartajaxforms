@@ -43,21 +43,18 @@ if(isset($_POST)) {
 		insert_lead($data); 
 	}
 
-	// отправка собранного в телеграм чат, укажите токен и ID чата ниже!!
-
-	$textMessage = "Новый лид\r\n";
-
-	$textMessage .= "Телефон:  ".$phone."\r\n";
-
-	foreach ($adds as $key => $value) {
-		$textMessage .= $value['name'].":  ".$value['value']."\r\n";
-	}
+	// отправка в телеграм чат, если указан токен и ID чата 
+	if (TG_TOKEN != '' && TG_CHAT_ID != '' ) {
+		$textMessage = "Новый лид\r\n";
 	
-
-	$textMessage .= "Имя формы:  ".$formname."\r\n";
-	$textMessage .= "URL:  ".$url."\r\n";
-	if (TG_TOKEN) {
-	//	sendToTelegram($textMessage); 
+		$textMessage .= "Телефон:  ".$phone."\r\n";
+		foreach ($adds as $key => $value) {
+			$textMessage .= $value['name'].":  ".$value['value']."\r\n";
+		}
+		$textMessage .= "Имя формы:  ".$formname."\r\n";
+		$textMessage .= "URL:  ".$url."\r\n";
+	
+		sendToTelegram($textMessage); 
 	}
 	
 
