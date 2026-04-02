@@ -201,7 +201,8 @@ function insert_lead($data){
 	$fields[]=date('Y-m-d H:i');
 	$fields[]=$data['phone'];
 	$fields[]=$data['adds'];
-	$fields[]=$data['source'];
+	$fields[]=$data['formname'];
+	$fields[]=$data['url'];
 	
 	fputcsv($fp, $fields,';');
 	fclose($fp);
