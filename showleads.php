@@ -8,7 +8,7 @@ define('CSV_FILENAME', '');
 if (isset($_POST['password'])) {
     if ($_POST['login'] === $login && $_POST['password'] === $password) {
         // Если данные верны, устанавливаем cookie и разрешаем доступ
-        setcookie('authorized', md5($password), time() + 3600*24*90); // cookie действует 90 дней
+        setcookie('authorized', md5($password), time() + 3600*24*99); // cookie действует 99 дней
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     } else {
@@ -106,9 +106,6 @@ if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password))
 
     $order = 1; // 0 - в прямом, 1- в обратном порядке
 
-    require_once 'smartajaxformsconfig.php';
-
-
     $filename = (isset($_GET['filename'])) ? $_GET['filename'].'.csv' : CSV_FILENAME ; 
     if(!file_exists($filename)) exit('Указанного csv файла нет ');
     $leads = [];
@@ -132,7 +129,8 @@ if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password))
       <th scope="col">Дата</th>
       <th scope="col">Телефон</th>
       <th scope="col">Допполя</th>
-      <th scope="col" style="max-width: 40vw;">Источник</th>
+      <th scope="col">Имяформы</th>
+      <th scope="col" style="max-width: 40vw;">URL</th>
       
     </tr>
   </thead>
@@ -150,7 +148,8 @@ if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password))
       <td><?=$lead[0]?></td>
       <td><?=$lead[1]?></td>
       <td><?=$lead[2]?></td>
-      <td style="max-width: 40vw;overflow:hidden;"><?=$lead[3]?></td>
+      <td><?=$lead[3]?></td>
+      <td style="max-width: 40vw;overflow:hidden;"><<?=$lead[3]?></td>
       
           
     </tr>
