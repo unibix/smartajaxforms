@@ -1,4 +1,91 @@
-<!doctype html>
+<?php
+// Логин и пароль для доступа
+$login = 'admin';
+$password = '111222333';
+
+// Проверяем, отправлены ли данные формы входа
+if (isset($_POST['password'])) {
+    if ($_POST['login'] === $login && $_POST['password'] === $password) {
+        // Если данные верны, устанавливаем cookie и разрешаем доступ
+        setcookie('authorized', md5($password), time() + 3600*24*90); // cookie действует 90 дней
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    } else {
+        $error = 'Неверный логин или пароль!';
+    }
+}
+
+// Проверяем наличие cookie и защифрованного пароля
+if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password)) {
+    if (isset($error)) {
+        echo '<p style="color: black;background: red;padding: 20px;">' . $error . '</p>';
+    }
+    // Показываем форму авторизации
+    ?>
+    <div class="login-box">
+        <h2>Вход</h2>
+        <form  method="post">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="login" name="login" required>
+    
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+    
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            font-size:20px;
+        }
+        .login-box {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .login-box h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .login-box label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-box button:hover {
+            background: #218838;
+        }
+    </style>
+    <?php
+    
+    
+    exit();
+}
+?><!doctype html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
