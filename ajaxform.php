@@ -56,9 +56,20 @@ if(isset($_POST)) {
 	
 		sendToTelegram($textMessage); 
 	}
+
+	// отправка в макс чат, если указан токен и ID чата 
+	if (MAX_TOKEN != '' && MAX_CHAT_ID != '' ) {
+		$textMessage = "Новый лид\r\n";
 	
-
-
+		$textMessage .= "Телефон:  ".$phone."\r\n";
+		foreach ($adds as $key => $value) {
+			$textMessage .= $value['name'].":  ".$value['value']."\r\n";
+		}
+		$textMessage .= "Имя формы:  ".$formname."\r\n";
+		$textMessage .= "URL:  ".$url."\r\n";
+	
+		sendToMax($textMessage); 
+	}
 }
 
 
@@ -66,22 +77,9 @@ if(isset($_POST)) {
 /* ОТПРАВКА СООБЩЕНИЯ В ТЕЛЕГРАММ чат */
 /* =============================      */
 function sendToTelegram($message) {
-	
-
 	$message = urlencode($message);
-
-	/*делаем CURL запрос*/
-	parser("https://api.telegram.org/bot".TG_TOKEN."/sendMessage?chat_id=".TG_CHAT_ID."&parse_mode=html&text={$message}");
-}
-
-
-/* =============================      */
-/* CURL функция собранная */
-/* =============================      */
-
-function parser($url){
 	$curl = curl_init();
-	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_URL, "https://api.telegram.org/bot".TG_TOKEN."/sendMessage?chat_id=".TG_CHAT_ID."&parse_mode=html&text={$message}");
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	$result = curl_exec($curl);
 	//var_dump($result); // ответ от api сервера если нужен будет
@@ -93,6 +91,44 @@ function parser($url){
 		return true;
 	}
 }
+
+
+/* =============================      */
+/* ОТПРАВКА СООБЩЕНИЯ В МАКС чат */
+/* =============================      */
+function sendToMax($message) {
+	$url = 'https://platform-api.max.ru/messages?chat_id='.MAX_CHAT_ID;
+	$ch = curl_init($url);
+	// Параметры POST-запроса
+	$data = [ 
+	    'text' => $message
+	];
+	
+	// Настройки запроса
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, [
+	    'Authorization: ' . MAX_TOKEN,
+	    'Content-Type: application/json'
+	]);
+	
+	// Выполнение запроса
+	$response = curl_exec($ch);
+	//var_dump($response);
+	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	curl_exec($ch);// Закрытие соединения
+
+	if ($http_code == 200) {
+	   return true;
+	} else {
+	    echo "Ошибка: не удалось отправить сообщение. HTTP-код: " . $http_code ."\nОтвет сервера: " . $response;
+		return false;
+	}
+}
+
+
+
 
 
 
