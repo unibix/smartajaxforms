@@ -2,7 +2,8 @@
 // Логин и пароль для доступа
 $login = 'admin';
 $password = '111222333';
-
+define('CSV_FILENAME', '');
+    
 // Проверяем, отправлены ли данные формы входа
 if (isset($_POST['password'])) {
     if ($_POST['login'] === $login && $_POST['password'] === $password) {
@@ -16,6 +17,7 @@ if (isset($_POST['password'])) {
 }
 
 if($password == '111222333') exit('Не задан пароль.');
+if(CSV_FILENAME == '') exit('Не задан csv файл.');
 
 // Проверяем наличие cookie и защифрованного пароля
 if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password)) {
