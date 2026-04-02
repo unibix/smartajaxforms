@@ -11,9 +11,18 @@
 
 2. для формы задать (или добавить) css class smartajaxform, пример class="smartajaxform" или  class="oldclass smartajaxform" - если у формы есть другие классы
 3. из обязательных полей телефон - name=ajaxx_phone
-4. добавьте скрытое поле куда система запишет URL с которого заполнили форму: name=url type=hidden с пустым значением. Пример: <input type="hidden" name="url">
-5. добавьте скрытое поле где будет передавать имя заполненной формы: name=formname type=hidden value="Заказать звонок". Пример: <input name=formname type=hidden value="Заказать звонок"> 
-6. добавьте блок с сообщением об успешной отправке, изначально оно должно быть display:none. и должно идти сразу после тега form с классом "messageAjaxForm". Пример: <div class="messageAjaxForm" style="display:none;background: #9de59d;padding:2rem;">Сообщение успешно отправлено! Сейчас вам перезвонит наш менеджер!</div>
+4. добавьте скрытое поле куда система запишет URL с которого заполнили форму: name=url type=hidden с пустым значением. Пример: 
+~~~html
+<input type="hidden" name="url">
+~~~
+5. добавьте скрытое поле где будет передавать имя заполненной формы: name=formname type=hidden value="Заказать звонок". Пример: 
+~~~html
+<input name=formname type=hidden value="Заказать звонок">
+~~~ 
+6. добавьте блок с сообщением об успешной отправке, изначально оно должно быть display:none. и должно идти сразу после тега form с классом "messageAjaxForm". Пример: 
+~~~html
+<div class="messageAjaxForm" style="display:none;background: #9de59d;padding:2rem;">Сообщение успешно отправлено! Сейчас вам перезвонит наш менеджер!</div>
+~~~ 
 7. в файле smartajaxform.php указать куда вы хотите принимать лиды: 
 - если в csv-файл, то укажите CSV_FILENAME, например "leadsfile.csv"
 - если в телеграмм, то укажите токен TG_TOKEN и айди чата
