@@ -70,6 +70,22 @@ if(isset($_POST)) {
 	
 		sendToMax($textMessage); 
 	}
+	
+	// отправка на email
+	if (EMAIL != '') {
+		$textMessage = "Новый лид\r\n";
+	
+		$textMessage .= "Телефон:  ".$phone."\r\n";
+		foreach ($adds as $key => $value) {
+			$textMessage .= $value['name'].":  ".$value['value']."\r\n";
+		}
+		$textMessage .= "Имя формы:  ".$formname."\r\n";
+		$textMessage .= "URL:  ".$url."\r\n";
+	
+		mailto(EMAIL, 'Новый лид ' . date('Y-m-d H:i', $textMessage) ; 
+	}
+	
+	
 }
 
 
@@ -128,8 +144,29 @@ function sendToMax($message) {
 }
 
 
+/* =============================      */
+/* отправка заявки на почту EMAIL   */
+/* =============================      */
 
+function mailto($to, $subject, $message, $from="Заявка", $fromAddr=EMAIL) {
 
+    mb_internal_encoding('UTF-8');
+
+    $headers = "Date: ".date("r")."\r\n";
+    $headers.= "From: =?UTF-8?B?".base64_encode($from)."?= <".$fromAddr.">\r\n";
+    $headers.= "MIME-Version: 1.0\r\n";
+
+    $subject = "=?UTF-8?B?".base64_encode($subject)."?=";
+    $msgType = (preg_match('@<br|</@uis', $message))  ? "text/html" :"text/plain";
+    
+
+    $headers .= "Content-Type: $msgType; charset=UTF-8\r\n";
+    $headers .= "Content-Transfer-Encoding: 8bit\r\n";
+    $headers .= "\r\n";
+    $body = $message;
+    
+    return mail($to, $subject, $body, $headers);
+}
 
 
 
