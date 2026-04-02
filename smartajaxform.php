@@ -5,6 +5,7 @@ define('CSV_FILENAME', '');
 
 // email для отправки заявок и лидов
 define('EMAIL', ''); //если оставить пустым то не будет отправлять 
+define('EMAIL_FROM', ''); //если оставить пустым то  будет отправлять от info@domen.com
 
 // Telegram 
 define('TG_TOKEN', ''); //если оставить пустым то не будет отправлять в телеграм чат лид 
@@ -167,10 +168,10 @@ function sendToMax($message) {
 /* отправка заявки на почту EMAIL   */
 /* =============================      */
 
-function mailto($to, $subject, $message, $from="Заявка", $fromAddr=EMAIL) {
+function mailto($to, $subject, $message, $from="Заявка") {
 
     mb_internal_encoding('UTF-8');
-
+	$fromAddr = (EMAIL_FROM != '') ? EMAIL_FROM : 'info@domen.com';
     $headers = "Date: ".date("r")."\r\n";
     $headers.= "From: =?UTF-8?B?".base64_encode($from)."?= <".$fromAddr.">\r\n";
     $headers.= "MIME-Version: 1.0\r\n";
