@@ -57,9 +57,8 @@ if(isset($_POST["ajaxx_phone"])) {
 		foreach ($adds as $key => $value) {
 			$data['adds'] .= $value['name'].":  ".$value['value'].', ';
 		}
-	
-		$data['source']="URL: ".$url." Имя формы: ".$formname." ";
-	
+		$data['formname']=$formname;
+	    $data['url']=$url;
 		insert_lead($data); 
 	}
 
