@@ -29,6 +29,19 @@ if(isset($_POST)) {
 		}
 	}
 
+	
+	// сохраняем в csv, если в настройках задано имя файла
+	if(CSV_FILENAME != '') {
+		$data['phone']=$phone;
+		$data['adds']='';
+		foreach ($adds as $key => $value) {
+			$data['adds'] .= $value['name'].":  ".$value['value'].', ';
+		}
+	
+		$data['source']="URL: ".$url." Имя формы: ".$formname." ";
+	
+		insert_lead($data); 
+	}
 
 	// отправка собранного в телеграм чат, укажите токен и ID чата ниже!!
 
@@ -47,18 +60,6 @@ if(isset($_POST)) {
 	//	sendToTelegram($textMessage); 
 	}
 	
-
-	// сохраняем в csv
-
-	$data['phone']=$phone;
-	$data['adds']='';
-	foreach ($adds as $key => $value) {
-		$data['adds'] .= $value['name'].":  ".$value['value'].', ';
-	}
-
-	$data['source']="URL: ".$url." Имя формы: ".$formname." ";
-
-	insert_lead($data); 
 
 
 }
