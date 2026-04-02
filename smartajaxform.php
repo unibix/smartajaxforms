@@ -28,7 +28,7 @@ define('YANDEX_CAPTCHA_SITEKEY', 'ysc1_xMdq3FfSBu2BfbKKt94GDjJfTdhh7bRtystAxzIK3
 
 
 
-if(isset($_POST)) {
+if(isset($_POST["ajaxx_phone"])) {
 
 	//сначала проверка на спам
 	if($_POST["url"] =='') { exit('Ошибка 718: пустой url'); }; 
@@ -102,7 +102,7 @@ if(isset($_POST)) {
 		$textMessage .= "Имя формы:  ".$formname."\r\n";
 		$textMessage .= "URL:  ".$url."\r\n";
 	
-		mailto(EMAIL, 'Новый лид ' . date('Y-m-d H:i', $textMessage) ; 
+		mailto(EMAIL, 'Новый лид ' . date('Y-m-d H:i'), $textMessage) ; 
 	}
 	
 	
