@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		field.value = window.location.href;
 	});
 
-     document.querySelectorAll(".ajaxform").forEach(function(form) {
+     document.querySelectorAll(".smartajaxform").forEach(function(form) {
         form.addEventListener("submit", function(ev) {
             ev.preventDefault();
             
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/ajaxform.php', true);
+            xhr.open('POST', '/smartajaxform.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send(dataSubmit);
             
