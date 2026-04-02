@@ -1,3 +1,4 @@
+const yandex_metrika_id=0;
 document.addEventListener('DOMContentLoaded', function() {
 	// в скрытое поле заносим текущий урл чтобы знать откуда заполнена форма
 	document.querySelectorAll('[name=url]').forEach(function(field) {
@@ -25,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
             xhr.send(dataSubmit);
             
             xhr.onload = function() {
-                ym(99999999999999999999999999999999999,'reachGoal','formcompleted');
+				if(yandex_metrika_id != 0) {
+                	ym(yandex_metrika_id,'reachGoal','formcompleted');
+				}
                 console.log('Достижение цели: Успешная отправка формы.');
             };
         });
@@ -35,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	// цель в метрику по открытию модального окна (обычно оно с формой)
 	document.querySelectorAll("[data-bs-toggle=modal]").forEach(function(button) {
         button.addEventListener("click", function() {
-            ym(103306672,'reachGoal','openmodal');
+			if(yandex_metrika_id != 0) {
+                ym(yandex_metrika_id,'reachGoal','openmodal');
+			}
             console.log('Достижение цели: Открыл модальное окно');
         });
     });
