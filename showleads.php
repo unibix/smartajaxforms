@@ -15,6 +15,8 @@ if (isset($_POST['password'])) {
     }
 }
 
+if($password == '111222333') exit('Не задан пароль.');
+
 // Проверяем наличие cookie и защифрованного пароля
 if (!isset($_COOKIE['authorized']) || $_COOKIE['authorized'] !== md5($password)) {
     if (isset($error)) {
