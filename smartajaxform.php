@@ -153,7 +153,7 @@ function sendToMax($message) {
 	$response = curl_exec($ch);
 	//var_dump($response);
 	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_exec($ch);// Закрытие соединения
+	curl_close($ch);// Закрытие соединения
 
 	if ($http_code == 200) {
 	   return true;
