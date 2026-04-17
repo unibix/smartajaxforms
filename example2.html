@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>пример формы с бутстрап</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+	    Пример №1:
+
+	    <form class="smartajaxform">
+	    	<input type="hidden" name="url" value="">
+            <input type="hidden" name="formname" value="Заказать звонок 2">
+
+		  <div class="mb-3">
+		    <label for="ajaxx_imya" class="form-label">Ваше имя</label>
+		    <input type="text" class="form-control" name="ajaxx_imya" value="Николайй">
+ 			<input type="hidden" name="ajaxx_name_imya" value="Имя">
+		  </div>
+
+		  <div class="mb-3">
+		    <label for="ajaxx_phone" class="form-label">Ваш телефон</label>
+		    <input type="text" class="form-control" name="ajaxx_phone" value="+7911 000-00-00"  required="">
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Отправить</button>
+		</form>
+
+            
+
+                
+
+        
+        <div class="messageAjaxForm  alert alert-success" style="display:none;background: #9de59d;padding:2rem;">Сообщение успешно отправлено! Сейчас вам перезвонит наш менеджер!</div>
+        
+        
+        
+        
+	    Пример №2 с модальным окном:
+	    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
+  Оставить заявку
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Заявка</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="smartajaxform">
+	    	<input type="hidden" name="url" value="">
+            <input type="hidden" name="formname" value="Заказать звонок 3">
+
+		  <div class="mb-3">
+		    <label for="ajaxx_imya" class="form-label">Ваше имя</label>
+		    <input type="text" class="form-control" name="ajaxx_imya" value="Филипп">
+ 			<input type="hidden" name="ajaxx_name_imya" value="Имя">
+		  </div>
+
+		  <div class="mb-3">
+		    <label for="ajaxx_phone" class="form-label">Ваш телефон</label>
+		    <input type="text" class="form-control" name="ajaxx_phone" value="+7888 888-88-88"  required="">
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Отправить</button>
+		</form>
+
+        <div class="messageAjaxForm  alert alert-success" style="display:none;background: #9de59d;padding:2rem;">Сообщение успешно отправлено! Сейчас вам перезвонит наш менеджер! Ожидайте звонка с номера ХХХХХ.</div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+           
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script src="/smartajaxform.js" ></script>
+
+
+</body>
+</html>
